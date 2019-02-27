@@ -9,10 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,7 +34,12 @@ public class StoreController {
 
     @ApiOperation("Lista as lojas de acordo com os filtros")
     @RequestMapping(method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
-    public ResponseEntity<List<Store>> getStoreByFilter(@RequestBody StoreFilter filter) {
+    public ResponseEntity<List<Store>> getStoreByFilter(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "address", required = false) String address) {
+        StoreFilter filter = StoreFilter
+                .builder()
+                .name(name)
+                .address(address)
+                .build();
         Specification<Store> storeSpecification = StoreSpecification.getFilter(filter);
         return ResponseEntity.ok(repository.findAll(storeSpecification));
     }
