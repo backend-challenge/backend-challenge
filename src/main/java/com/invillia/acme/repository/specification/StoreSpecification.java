@@ -5,8 +5,6 @@ import com.invillia.acme.model.filter.StoreFilter;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
-import java.util.Objects;
-
 public class StoreSpecification {
 
     public static Specification<Store> getFilter(StoreFilter filter) {
@@ -20,7 +18,7 @@ public class StoreSpecification {
             if (StringUtils.isEmpty(address)) {
                 return  null;
             }
-            return cb.like(cb.upper(root.get("name")), "%" + address.toUpperCase() + "%");
+            return cb.like(cb.upper(root.get("address")), "%" + address.toUpperCase() + "%");
         };
     }
 

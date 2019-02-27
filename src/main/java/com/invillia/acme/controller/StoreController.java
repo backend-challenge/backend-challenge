@@ -8,8 +8,10 @@ import com.invillia.acme.repository.specification.StoreSpecification;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
@@ -28,8 +30,13 @@ public class StoreController {
 
     @ApiOperation("Atualiza uma loja já existente")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
-    public ResponseEntity<Store> updateStore(@RequestBody StoreDto dto) {
-        return ResponseEntity.ok(repository.save(dto.getEntity()));
+    public ResponseEntity<Store> updateStore(@RequestBody StoreDto dto, @PathVariable(value = "id") Integer id) {
+        repository.findById(id).orElseThrow(
+                () -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Loja não encontrada")
+        );
+        Store entity = dto.getEntity();
+        entity.setId(id);
+        return ResponseEntity.ok(repository.save(entity));
     }
 
     @ApiOperation("Lista as lojas de acordo com os filtros")
