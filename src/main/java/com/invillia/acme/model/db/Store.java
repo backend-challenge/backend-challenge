@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Store {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column
     private String address;

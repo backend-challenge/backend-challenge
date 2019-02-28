@@ -16,7 +16,7 @@ public class StoreSpecification {
     private static Specification<Store> likeAddress(String address) {
         return (root, query, cb) -> {
             if (StringUtils.isEmpty(address)) {
-                return  null;
+                return null;
             }
             return cb.like(cb.upper(root.get("address")), "%" + address.toUpperCase() + "%");
         };
