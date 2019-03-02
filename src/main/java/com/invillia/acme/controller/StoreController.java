@@ -32,6 +32,6 @@ public class StoreController {
 	@ApiOperation("Lista as lojas de acordo com os filtros")
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
 	public ResponseEntity<List<Store>> getStoreByFilter(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "address", required = false) String address) {
-		return getStoreByFilter(name, address);
+		return ResponseEntity.ok(business.getStoreByFilter(name, address));
 	}
 }
