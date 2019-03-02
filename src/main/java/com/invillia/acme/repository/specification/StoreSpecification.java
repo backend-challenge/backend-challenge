@@ -7,27 +7,27 @@ import org.springframework.util.StringUtils;
 
 public class StoreSpecification {
 
-    public static Specification<Store> getFilter(StoreFilter filter) {
-        return Specification
-                .where(likeAddress(filter.getAddress())
-                        .and(likeName(filter.getName())));
-    }
+	public static Specification<Store> getFilter(StoreFilter filter) {
+		return Specification
+				.where(likeAddress(filter.getAddress())
+						.and(likeName(filter.getName())));
+	}
 
-    private static Specification<Store> likeAddress(String address) {
-        return (root, query, cb) -> {
-            if (StringUtils.isEmpty(address)) {
-                return null;
-            }
-            return cb.like(cb.upper(root.get("address")), "%" + address.toUpperCase() + "%");
-        };
-    }
+	private static Specification<Store> likeAddress(String address) {
+		return (root, query, cb) -> {
+			if (StringUtils.isEmpty(address)) {
+				return null;
+			}
+			return cb.like(cb.upper(root.get("address")), "%" + address.toUpperCase() + "%");
+		};
+	}
 
-    private static Specification<Store> likeName(String name) {
-        return (root, query, cb) -> {
-            if (StringUtils.isEmpty(name)) {
-                return null;
-            }
-            return cb.like(cb.upper(root.get("name")), "%" + name.toUpperCase() + "%");
-        };
-    }
+	private static Specification<Store> likeName(String name) {
+		return (root, query, cb) -> {
+			if (StringUtils.isEmpty(name)) {
+				return null;
+			}
+			return cb.like(cb.upper(root.get("name")), "%" + name.toUpperCase() + "%");
+		};
+	}
 }

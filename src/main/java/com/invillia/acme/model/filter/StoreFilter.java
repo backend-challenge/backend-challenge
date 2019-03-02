@@ -9,6 +9,6 @@ import lombok.Setter;
 @Builder
 public class StoreFilter {
 
-    private String name;
-    private String address;
+	private String name;
+	private String address;
 }

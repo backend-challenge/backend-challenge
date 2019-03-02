@@ -12,12 +12,12 @@ import javax.persistence.*;
 @Builder
 public class Store {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    @Column
-    private String address;
-    @Column
-    private String name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+	@Column
+	private String address;
+	@Column
+	private String name;
 
 }
